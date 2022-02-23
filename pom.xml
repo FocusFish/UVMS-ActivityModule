@@ -33,8 +33,6 @@
         <activity.name>Activity</activity.name>
 
         <!-- Other UVMS module dependencies -->
-        <activity.model.version>1.0.11-SWE</activity.model.version>
-
         <uvms.pom.version>3.6</uvms.pom.version>
         <uvms.commons.version>4.1.11</uvms.commons.version>
         <usm4uvms.version>4.1.9</usm4uvms.version>
@@ -157,21 +155,7 @@
             <dependency>
                 <groupId>eu.europa.ec.fisheries.uvms.activity</groupId>
                 <artifactId>activity-model</artifactId>
-                <version>${activity.model.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mapstruct</groupId>
-                        <artifactId>mapstruct</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-annotations</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -399,6 +383,7 @@
 
     <modules>
         <module>LIQUIBASE</module>
+        <module>model</module>
         <module>application</module>
         <module>client-model</module>
     </modules>
