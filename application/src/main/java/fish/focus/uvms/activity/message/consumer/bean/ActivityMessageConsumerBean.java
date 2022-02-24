@@ -1,0 +1,104 @@
+/*
+Developed by the European Commission - Directorate General for Maritime Affairs and Fisheries @ European Union, 2015-2016.
+
+This file is part of the Integrated Fisheries Data Management (IFDM) Suite. The IFDM Suite is free software: you can redistribute it 
+and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of 
+the License, or any later version. The IFDM Suite is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more 
+details. You should have received a copy of the GNU General Public License along with the IFDM Suite. If not, see <http://www.gnu.org/licenses/>.
+
+ */
+package fish.focus.uvms.activity.message.consumer.bean;
+
+
+import fish.focus.schema.exchange.module.v1.ExchangeModuleMethod;
+import fish.focus.uvms.commons.message.api.MessageConstants;
+import fish.focus.uvms.commons.message.context.MappedDiagnosticContext;
+import fish.focus.uvms.activity.message.event.ActivityMessageErrorEvent;
+import fish.focus.uvms.activity.message.event.carrier.EventMessage;
+import fish.focus.uvms.activity.model.exception.ActivityModelMarshallException;
+import fish.focus.uvms.activity.model.mapper.ActivityModuleResponseMapper;
+import fish.focus.uvms.activity.model.mapper.FaultCode;
+import fish.focus.uvms.activity.model.mapper.JAXBMarshaller;
+import fish.focus.uvms.activity.model.schemas.ActivityModuleMethod;
+import fish.focus.uvms.activity.model.schemas.ActivityModuleRequest;
+import fish.focus.uvms.activity.model.schemas.SetFLUXFAReportOrQueryMessageRequest;
+import fish.focus.uvms.activity.service.bean.EfrMessageSaver;
+import fish.focus.uvms.activity.service.bean.FluxReportMessageSaver;
+import lombok.extern.slf4j.Slf4j;
+
+import javax.ejb.ActivationConfigProperty;
+import javax.ejb.EJB;
+import javax.ejb.MessageDriven;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+@MessageDriven(activationConfig = {
+        @ActivationConfigProperty(propertyName = MessageConstants.DESTINATION_TYPE_STR, propertyValue = MessageConstants.DESTINATION_TYPE_QUEUE),
+        @ActivationConfigProperty(propertyName = MessageConstants.DESTINATION_STR, propertyValue = MessageConstants.QUEUE_MODULE_ACTIVITY),
+        @ActivationConfigProperty(propertyName = MessageConstants.MESSAGE_SELECTOR_STR, propertyValue = "messageSelector IS NULL")
+})
+@Slf4j
+public class ActivityMessageConsumerBean implements MessageListener {
+
+    @Inject
+    @ActivityMessageErrorEvent
+    private Event<EventMessage> errorEvent;
+
+    @EJB
+    private EfrMessageSaver efrMessageSaver;
+
+    @EJB
+    private FluxReportMessageSaver fluxReportMessageSaver;
+
+    @Override
+    public void onMessage(Message message) {
+        log.debug("Received message");
+
+        TextMessage textMessage = (TextMessage) message;
+        try {
+            String function = textMessage.getStringProperty(MessageConstants.JMS_FUNCTION_PROPERTY);
+            ExchangeModuleMethod exchangeMethod = (function != null) ? ExchangeModuleMethod.valueOf(function) : null;
+            if (exchangeMethod == ExchangeModuleMethod.EFR_SAVE_ACTIVITY) {
+                log.trace("Received EFR message: {}", textMessage);
+                String efrMessageText = textMessage.getText();
+                efrMessageSaver.handleEfrActivity(efrMessageText);
+            } else {
+                MappedDiagnosticContext.addMessagePropertiesToThreadMappedDiagnosticContext(textMessage);
+                ActivityModuleRequest request = JAXBMarshaller.unmarshallTextMessage(textMessage, ActivityModuleRequest.class);
+
+                log.debug("Successfully parsed message to {}", ActivityModuleRequest.class.getName());
+
+                if (request == null) {
+                    log.error("Request is null");
+                    return;
+                }
+
+                ActivityModuleMethod method = request.getMethod();
+                if (method == null) {
+                    log.error("Request method is null");
+                    return;
+                }
+
+                if (method == ActivityModuleMethod.GET_FLUX_FA_REPORT) {
+                    saveFluxReport(textMessage);
+                } else {
+                    log.error("Request method {} is not implemented", method.name());
+                    errorEvent.fire(new EventMessage(textMessage, ActivityModuleResponseMapper.createFaultMessage(FaultCode.ACTIVITY_MESSAGE, "Request method " + method.name() + " is not implemented")));
+                }
+            }
+        } catch (ActivityModelMarshallException | ClassCastException | JMSException e) {
+            log.error("Error when receiving message in activity", e);
+            errorEvent.fire(new EventMessage(textMessage, ActivityModuleResponseMapper.createFaultMessage(FaultCode.ACTIVITY_MESSAGE, "Error when receiving message: " + e.getMessage())));
+        }
+    }
+
+    private void saveFluxReport(TextMessage textMessage) throws ActivityModelMarshallException {
+        SetFLUXFAReportOrQueryMessageRequest saveReportRequest = JAXBMarshaller.unmarshallTextMessage(textMessage, SetFLUXFAReportOrQueryMessageRequest.class);
+        fluxReportMessageSaver.saveFluxReportMessage(saveReportRequest);
+    }
+}

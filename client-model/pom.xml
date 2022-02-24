@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+        <groupId>fish.focus.uvms.activity</groupId>
         <artifactId>activity</artifactId>
-        <groupId>eu.europa.ec.fisheries.uvms.activity</groupId>
         <version>1.2.15-SWE-SNAPSHOT</version>
     </parent>
 
@@ -16,7 +16,7 @@
         <!-- UVMS COMMONS DEPENDENCIES -->
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
+            <groupId>fish.focus.uvms.commons</groupId>
             <artifactId>uvms-commons-date</artifactId>
         </dependency>
 
@@ -24,7 +24,7 @@
         <!-- UVMS DEPENDENCIES -->
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.activity</groupId>
+            <groupId>fish.focus.uvms.activity</groupId>
             <artifactId>activity-model</artifactId>
         </dependency>
 

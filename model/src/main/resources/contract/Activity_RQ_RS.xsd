@@ -14,9 +14,9 @@
 <xs:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
            xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:20"
 		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		   xmlns="http://europa.eu/ec/fisheries/uvms/activity/model/schemas"
+		   xmlns="http://focus.fish/uvms/activity/model/schemas"
 		   id="FISH2015_SPATIAL2015"
-		   targetNamespace="http://europa.eu/ec/fisheries/uvms/activity/model/schemas" version="1.0">
+		   targetNamespace="http://focus.fish/uvms/activity/model/schemas" version="1.0">
 
 	<xs:include schemaLocation="Activity_CommonTypes.xsd"/>
 

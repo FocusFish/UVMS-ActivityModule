@@ -1,0 +1,7 @@
+#!groovy
+@Library('uvms-jenkins@main') _
+uvmsJenkinsfile {
+  MAVEN_PROFILES          = '-Ppostgres,jacoco,publish-sql,docker'
+  MAVEN_PROFILES_RELEASE  = '-Pdev,postgres,publish-sql'
+  DOCKER                  = true
+}

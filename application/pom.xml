@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>eu.europa.ec.fisheries.uvms.activity</groupId>
+        <groupId>fish.focus.uvms.activity</groupId>
         <artifactId>activity</artifactId>
         <version>1.2.15-SWE-SNAPSHOT</version>
     </parent>
@@ -23,7 +23,7 @@
         <!-- PROJECT DEPENDENCIES -->
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.activity</groupId>
+            <groupId>fish.focus.uvms.activity</groupId>
             <artifactId>client-model</artifactId>
         </dependency>
 
@@ -31,37 +31,13 @@
         <!-- UVMS COMMONS DEPENDENCIES -->
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
+            <groupId>fish.focus.uvms.commons</groupId>
             <artifactId>uvms-commons-rest</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.resteasy</groupId>
-                    <artifactId>resteasy-multipart-provider</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
+            <groupId>fish.focus.uvms.commons</groupId>
             <artifactId>uvms-commons-message</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- UVMS DEPENDENCIES -->
@@ -78,7 +54,7 @@
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.exchange</groupId>
+            <groupId>fish.focus.uvms.exchange</groupId>
             <artifactId>exchange-model</artifactId>
         </dependency>
 
@@ -99,33 +75,33 @@
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.asset</groupId>
+            <groupId>fish.focus.uvms.asset</groupId>
             <artifactId>asset-model</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.asset</groupId>
+            <groupId>fish.focus.uvms.asset</groupId>
             <artifactId>asset-client</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms</groupId>
+            <groupId>fish.focus.uvms.lib</groupId>
             <artifactId>usm4uvms</artifactId>
             <exclusions>
                 <exclusion>
+                    <groupId>fish.focus.uvms.commons</groupId>
                     <artifactId>uvms-commons-message</artifactId>
-                    <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms</groupId>
+            <groupId>fish.focus.uvms.lib</groupId>
             <artifactId>uvms-config</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.config</groupId>
+            <groupId>fish.focus.uvms.config</groupId>
             <artifactId>config-model</artifactId>
         </dependency>
 
@@ -225,42 +201,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- USE following command to run this profile: mvn clean install -P generate-rest-doc -Dhostname=127.0.0.1 -Dport=8080  -->
-    <profiles>
-        <profile>
-            <id>generate-rest-doc</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <executions>
-                            <execution>
-                                <id>generate-service-docs</id>
-                                <phase>generate-resources</phase>
-                                <configuration>
-                                    <doclet>com.carma.swagger.doclet.ServiceDoclet</doclet>
-                                    <docletArtifact>
-                                        <groupId>com.carma</groupId>
-                                        <artifactId>swagger-doclet</artifactId>
-                                        <version>1.1.2</version>
-                                    </docletArtifact>
-                                    <reportOutputDirectory>src/main/webapp</reportOutputDirectory>
-                                    <useStandardDocletOptions>false</useStandardDocletOptions>
-                                    <additionalparam>-apiVersion ${project.version}
-                                        -docBasePath /${project.parent.artifactId}/apidocs
-                                        -apiBasePath /${project.parent.artifactId}/rest</additionalparam>
-                                </configuration>
-                                <goals>
-                                    <goal>javadoc</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
