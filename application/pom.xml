@@ -16,6 +16,7 @@
         <docker.dev.start.phase>test-compile</docker.dev.start.phase>
         <docker.dev.prestop.phase>install</docker.dev.prestop.phase>
         <docker.liquibase.phase>test-compile</docker.liquibase.phase>
+        <docker.liquibase.changeLogFile>../LIQUIBASE/postgres/changelog/db-changelog-master.xml</docker.liquibase.changeLogFile>
         <jaxb-impl.version>2.3.3</jaxb-impl.version>
     </properties>
 
