@@ -11,7 +11,7 @@
 
     <groupId>fish.focus.uvms.activity</groupId>
     <artifactId>activity</artifactId>
-    <version>1.2.15</version>
+    <version>1.2.16-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>UnionVms activity module for handling fishing activities.</description>
 
