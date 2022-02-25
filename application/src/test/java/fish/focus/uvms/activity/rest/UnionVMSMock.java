@@ -12,7 +12,6 @@ public class UnionVMSMock extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> sets = new HashSet<>();
         sets.add(AssetRestMock.class);
-        sets.add(MdrRestMock.class);
         return sets;
     }
 }

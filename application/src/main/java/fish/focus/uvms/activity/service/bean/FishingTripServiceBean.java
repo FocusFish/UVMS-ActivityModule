@@ -34,7 +34,6 @@ import fish.focus.uvms.activity.model.schemas.SearchFilter;
 import fish.focus.uvms.activity.service.ActivityService;
 import fish.focus.uvms.activity.service.AssetModuleService;
 import fish.focus.uvms.activity.service.FishingTripService;
-import fish.focus.uvms.activity.service.MdrModuleService;
 import fish.focus.uvms.activity.service.dto.AssetIdentifierDto;
 import fish.focus.uvms.activity.service.dto.fareport.details.VesselDetailsDTO;
 import fish.focus.uvms.activity.service.dto.fishingtrip.CatchEvolutionDTO;
@@ -112,9 +111,6 @@ public class FishingTripServiceBean extends BaseActivityBean implements FishingT
     @EJB
     private AssetModuleService assetModuleService;
 
-    @EJB
-    private MdrModuleService mdrModuleService;
-
     private FaReportDocumentDao faReportDocumentDao;
     private FishingActivityDao fishingActivityDao;
     private VesselTransportMeansDao vesselTransportMeansDao;
@@ -151,7 +147,7 @@ public class FishingTripServiceBean extends BaseActivityBean implements FishingT
         VesselDetailsDTO detailsDTO;
         detailsDTO = vesselTransportMeansMapper.map(vesselTransportMeansEntity);
 
-        getMdrCodesEnrichWithAssetsModuleDataIfNeeded(detailsDTO);
+        enrichWithAssetsModuleDataIfNeeded(detailsDTO);
 
         if (fishingActivityEntity != null) {
             VesselStorageCharacteristicsEntity sourceVesselCharId = fishingActivityEntity.getSourceVesselCharId();
@@ -162,47 +158,38 @@ public class FishingTripServiceBean extends BaseActivityBean implements FishingT
         return detailsDTO;
     }
 
-    //To process MDR code list and compare with  database:vesselTransportMeansDao and then enrich with asset module
-    private void getMdrCodesEnrichWithAssetsModuleDataIfNeeded(VesselDetailsDTO vesselDetailsDTO) {
-        final String ACRONYM = "FLUX_VESSEL_ID_TYPE";
-        final String filter = "*";
-        final List<String> columnsList = new ArrayList<>();
-        Integer nrOfResults = 1000;
+    private void enrichWithAssetsModuleDataIfNeeded(VesselDetailsDTO vesselDetailsDTO) {
         if (vesselDetailsDTO == null) {
             return;
         }
-        List<String> codeList;
-        codeList = mdrModuleService.getAcronymFromMdr(ACRONYM, filter, columnsList, nrOfResults, "code").get("code");
         Set<AssetIdentifierDto> vesselIdentifiers = vesselDetailsDTO.getVesselIdentifiers();
-        if (vesselIdentifiers == null || codeList == null) {
+        if (vesselIdentifiers == null) {
             return;
         }
 
         SearchBranch query = new SearchBranch();
         query.setLogicalAnd(false);
         for (AssetIdentifierDto assetIdentifierDto : vesselIdentifiers) {
-            if (codeList.contains(assetIdentifierDto.getIdentifierSchemeId().name())) {
-                switch (assetIdentifierDto.getIdentifierSchemeId()) {
-                    case CFR:
-                        query.addNewSearchLeaf(SearchFields.CFR, assetIdentifierDto.getFaIdentifierId());
-                        break;
-                    case EXT_MARK:
-                        query.addNewSearchLeaf(SearchFields.EXTERNAL_MARKING, assetIdentifierDto.getFaIdentifierId());
-                        break;
-                    case GFCM:
-                        query.addNewSearchLeaf(SearchFields.GFCM, assetIdentifierDto.getFaIdentifierId());
-                        break;
-                    case ICCAT:
-                        query.addNewSearchLeaf(SearchFields.ICCAT, assetIdentifierDto.getFaIdentifierId());
-                        break;
-                    case IRCS:
-                        query.addNewSearchLeaf(SearchFields.IRCS, assetIdentifierDto.getFaIdentifierId());
-                        break;
-                    case UVI:
-                        query.addNewSearchLeaf(SearchFields.UVI, assetIdentifierDto.getFaIdentifierId());
-                        break;
-                    default:
-                }
+            switch (assetIdentifierDto.getIdentifierSchemeId()) {
+                case CFR:
+                    query.addNewSearchLeaf(SearchFields.CFR, assetIdentifierDto.getFaIdentifierId());
+                    break;
+                case EXT_MARK:
+                    query.addNewSearchLeaf(SearchFields.EXTERNAL_MARKING, assetIdentifierDto.getFaIdentifierId());
+                    break;
+                case GFCM:
+                    query.addNewSearchLeaf(SearchFields.GFCM, assetIdentifierDto.getFaIdentifierId());
+                    break;
+                case ICCAT:
+                    query.addNewSearchLeaf(SearchFields.ICCAT, assetIdentifierDto.getFaIdentifierId());
+                    break;
+                case IRCS:
+                    query.addNewSearchLeaf(SearchFields.IRCS, assetIdentifierDto.getFaIdentifierId());
+                    break;
+                case UVI:
+                    query.addNewSearchLeaf(SearchFields.UVI, assetIdentifierDto.getFaIdentifierId());
+                    break;
+                default:
             }
         }
         List<AssetDTO> assetList = assetModuleService.getAssets(query);

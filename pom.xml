@@ -41,8 +41,6 @@
         <config.model.version>4.3.12</config.model.version>
         <exchange.model.version>5.3.23</exchange.model.version>
         <uvms.config.version>4.1.6</uvms.config.version>
-        <mdr.model.version>1.0.5</mdr.model.version>
-        <mdrSwe.client.version>1.0.18</mdrSwe.client.version>
         <asset.version>6.8.23</asset.version>
 
         <!-- Third-party dependency versions -->
@@ -121,34 +119,6 @@
                 <groupId>fish.focus.uvms.config</groupId>
                 <artifactId>config-model</artifactId>
                 <version>${config.model.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>eu.europa.ec.fisheries.uvms.mdr</groupId>
-                <artifactId>mdr-model</artifactId>
-                <version>${mdr.model.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-annotations</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>eu.europa.ec.fisheries.uvms.mdrSwe</groupId>
-                <artifactId>mdr-client</artifactId>
-                <version>${mdrSwe.client.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <dependency>

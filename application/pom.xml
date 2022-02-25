@@ -60,22 +60,6 @@
         </dependency>
 
         <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.mdr</groupId>
-            <artifactId>mdr-model</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>eu.europa.ec.fisheries.uvms.mdrSwe</groupId>
-            <artifactId>mdr-client</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>uvms-commons-rest</artifactId>
-                    <groupId>eu.europa.ec.fisheries.uvms.commons</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
             <groupId>fish.focus.uvms.asset</groupId>
             <artifactId>asset-model</artifactId>
         </dependency>
