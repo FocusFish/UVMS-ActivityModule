@@ -39,9 +39,9 @@
         <uvms.maven.version>3.16</uvms.maven.version>
 
         <config.model.version>4.3.12</config.model.version>
-        <exchange.model.version>5.3.23</exchange.model.version>
+        <exchange.model.version>5.3.25</exchange.model.version>
         <uvms.config.version>4.1.6</uvms.config.version>
-        <asset.version>6.8.23</asset.version>
+        <asset.version>6.8.24</asset.version>
 
         <!-- Third-party dependency versions -->
         <mapstruct.version>1.3.1.Final</mapstruct.version>
@@ -52,7 +52,7 @@
         <geotools.version>22.0</geotools.version>
 
         <!-- Test dependency versions -->
-        <activemq.artemis.version>2.15.0</activemq.artemis.version>
+        <activemq.artemis.version>2.20.0</activemq.artemis.version>
 
         <!-- Test filter -->
         <activity.integration.test.filter>**/*IntegrationTest.java</activity.integration.test.filter>
