@@ -10,7 +10,7 @@
     <parent>
         <groupId>fish.focus.uvms.activity</groupId>
         <artifactId>activity</artifactId>
-        <version>1.2.15</version>
+        <version>1.2.16</version>
     </parent>
 
     <profiles>
@@ -80,7 +80,7 @@
                     <plugin>
                         <groupId>org.liquibase</groupId>
                         <artifactId>liquibase-maven-plugin</artifactId>
-                        <version>3.10.1</version>
+                        <version>4.8.0</version>
                         <configuration>
                             <url>${db.docker.url}</url>
                             <changeLogFile>${db.changeLogFile}</changeLogFile>
@@ -100,7 +100,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.2.0</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>attach-artifacts</id>
@@ -133,7 +133,7 @@
                 <plugin>
                     <groupId>org.liquibase</groupId>
                     <artifactId>liquibase-maven-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>4.8.0</version>
                     <configuration>
                         <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                         <changeLogFile>${db.changeLogFile}</changeLogFile>
