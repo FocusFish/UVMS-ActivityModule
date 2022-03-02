@@ -52,7 +52,7 @@
         <geotools.version>22.0</geotools.version>
 
         <!-- Test dependency versions -->
-        <activemq.artemis.version>2.15.0</activemq.artemis.version>
+        <activemq.artemis.version>2.20.0</activemq.artemis.version>
 
         <!-- Test filter -->
         <activity.integration.test.filter>**/*IntegrationTest.java</activity.integration.test.filter>
