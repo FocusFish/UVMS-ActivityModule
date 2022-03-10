@@ -49,7 +49,6 @@
         <apache.commons.lang3.version>3.12.0</apache.commons.lang3.version>
         <commons.io.version>2.6</commons.io.version>
         <lombok.version>1.18.20</lombok.version>
-        <geotools.version>22.0</geotools.version>
 
         <!-- Test dependency versions -->
         <activemq.artemis.version>2.20.0</activemq.artemis.version>
@@ -80,6 +79,13 @@
             <dependency>
                 <groupId>fish.focus.uvms.maven</groupId>
                 <artifactId>uvms-pom-java11-deps</artifactId>
+                <version>${uvms.pom.version}</version>
+                <type>pom</type>
+            </dependency>
+
+            <dependency>
+                <groupId>fish.focus.uvms.maven</groupId>
+                <artifactId>uvms-pom-gis-deps</artifactId>
                 <version>${uvms.pom.version}</version>
                 <type>pom</type>
             </dependency>
@@ -165,17 +171,6 @@
             </dependency>
 
             <!-- THIRD-PARTY DEPDENDENCIES -->
-            <dependency>
-                <groupId>org.geotools</groupId>
-                <artifactId>gt-geojson</artifactId>
-                <version>${geotools.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax</groupId>
-                        <artifactId>javaee-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
 
             <dependency>
                 <groupId>org.mapstruct</groupId>
