@@ -10,7 +10,7 @@
     <parent>
         <groupId>fish.focus.uvms.activity</groupId>
         <artifactId>activity</artifactId>
-        <version>1.2.16</version>
+        <version>1.2.17</version>
     </parent>
 
     <profiles>
@@ -29,7 +29,7 @@
                 <db.outputFile>postgres/changelog/generatedChangelog.xml</db.outputFile>
                 <driver.groupId>org.postgresql</driver.groupId>
                 <driver.artifactId>postgresql</driver.artifactId>
-                <driver.version>42.2.16</driver.version>
+                <driver.version>42.3.3</driver.version>
             </properties>
             <dependencies>
                 <dependency>
