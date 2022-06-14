@@ -51,7 +51,7 @@
         <lombok.version>1.18.20</lombok.version>
 
         <!-- Test dependency versions -->
-        <activemq.artemis.version>2.21.0</activemq.artemis.version>
+        <activemq.artemis.version>2.23.0</activemq.artemis.version>
 
         <!-- Test filter -->
         <activity.integration.test.filter>**/*IntegrationTest.java</activity.integration.test.filter>
