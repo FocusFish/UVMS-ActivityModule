@@ -5,7 +5,7 @@
     <parent>
         <artifactId>activity</artifactId>
         <groupId>fish.focus.uvms.activity</groupId>
-        <version>1.2.19-SNAPSHOT</version>
+        <version>1.2.19</version>
     </parent>
 
     <artifactId>activity-model</artifactId>
