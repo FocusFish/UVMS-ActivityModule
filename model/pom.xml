@@ -5,7 +5,7 @@
     <parent>
         <artifactId>activity</artifactId>
         <groupId>fish.focus.uvms.activity</groupId>
-        <version>1.2.18</version>
+        <version>1.2.19</version>
     </parent>
 
     <artifactId>activity-model</artifactId>
@@ -43,7 +43,7 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.14.0</version>
+                <version>0.15.3</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>

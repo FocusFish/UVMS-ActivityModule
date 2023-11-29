@@ -10,7 +10,7 @@
     <parent>
         <groupId>fish.focus.uvms.activity</groupId>
         <artifactId>activity</artifactId>
-        <version>1.2.18</version>
+        <version>1.2.19</version>
     </parent>
 
     <profiles>
@@ -29,7 +29,7 @@
                 <db.outputFile>postgres/changelog/generatedChangelog.xml</db.outputFile>
                 <driver.groupId>org.postgresql</driver.groupId>
                 <driver.artifactId>postgresql</driver.artifactId>
-                <driver.version>42.3.3</driver.version>
+                <driver.version>42.7.0</driver.version>
             </properties>
             <dependencies>
                 <dependency>
@@ -100,7 +100,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.3.0</version>
+                        <version>3.5.0</version>
                         <executions>
                             <execution>
                                 <id>attach-artifacts</id>
@@ -150,7 +150,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.6.0</version>
                 <configuration>
                     <descriptors>assembly.xml</descriptors>
                     <finalName>${project.artifactId}</finalName>
