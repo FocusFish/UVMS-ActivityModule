@@ -34,7 +34,7 @@
 
         <!-- Other UVMS module dependencies -->
         <uvms.pom.version>3.19</uvms.pom.version>
-        <uvms.commons.version>4.1.12</uvms.commons.version>
+        <uvms.commons.version>4.1.14</uvms.commons.version>
         <usm4uvms.version>4.1.11</usm4uvms.version>
         <uvms.maven.version>3.19</uvms.maven.version>
 
