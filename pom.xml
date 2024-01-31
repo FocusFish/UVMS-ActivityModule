@@ -41,7 +41,7 @@
         <config.model.version>4.3.12</config.model.version>
         <exchange.model.version>5.3.27</exchange.model.version>
         <uvms.config.version>4.1.6</uvms.config.version>
-        <asset.version>6.8.27</asset.version>
+        <asset.version>6.8.29</asset.version>
 
         <!-- Third-party dependency versions -->
         <mapstruct.version>1.3.1.Final</mapstruct.version>
