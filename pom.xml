@@ -44,7 +44,7 @@
         <asset.version>6.8.35</asset.version>
 
         <!-- Third-party dependency versions -->
-        <mapstruct.version>1.3.1.Final</mapstruct.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
         <xmlunit-core.version>2.10.0</xmlunit-core.version>
         <apache.commons.lang3.version>3.17.0</apache.commons.lang3.version>
         <commons.io.version>2.6</commons.io.version>
