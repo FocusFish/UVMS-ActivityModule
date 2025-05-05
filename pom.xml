@@ -33,7 +33,7 @@
         <activity.name>Activity</activity.name>
 
         <!-- Other UVMS module dependencies -->
-        <uvms.pom.version>3.27</uvms.pom.version>
+        <uvms.pom.version>3.29</uvms.pom.version>
         <uvms.commons.version>4.1.15</uvms.commons.version>
         <usm4uvms.version>4.1.12</usm4uvms.version>
         <uvms.maven.version>3.27</uvms.maven.version>
