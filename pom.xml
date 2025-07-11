@@ -49,7 +49,7 @@
         <xmlunit-core.version>2.10.3</xmlunit-core.version>
         <apache.commons.lang3.version>3.18.0</apache.commons.lang3.version>
         <commons.io.version>2.6</commons.io.version>
-        <lombok.version>1.18.20</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
 
         <!-- Test dependency versions -->
         <activemq.artemis.version>2.38.0</activemq.artemis.version>
