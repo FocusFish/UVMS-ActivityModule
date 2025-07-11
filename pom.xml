@@ -11,6 +11,7 @@
 
     <groupId>fish.focus.uvms.activity</groupId>
     <artifactId>activity</artifactId>
+    <name>activity</name>
     <version>1.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>UnionVms activity module for handling fishing activities.</description>
