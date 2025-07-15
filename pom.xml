@@ -40,7 +40,7 @@
         <uvms.maven.version>3.33</uvms.maven.version>
 
         <config.model.version>4.4.1</config.model.version>
-        <exchange.model.version>5.3.32</exchange.model.version>
+        <exchange.model.version>5.4.0</exchange.model.version>
         <uvms.config.version>4.2.0</uvms.config.version>
         <asset.version>6.8.37</asset.version>
 
