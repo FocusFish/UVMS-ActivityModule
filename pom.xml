@@ -6,13 +6,13 @@
         <groupId>fish.focus.uvms.maven</groupId>
         <artifactId>uvms-pom</artifactId>
         <relativePath />
-        <version>3.33</version>
+        <version>3.34</version>
     </parent>
 
     <groupId>fish.focus.uvms.activity</groupId>
     <artifactId>activity</artifactId>
     <name>activity</name>
-    <version>1.3.1</version>
+    <version>1.3.2</version>
     <packaging>pom</packaging>
     <description>UnionVms activity module for handling fishing activities.</description>
 
@@ -34,20 +34,20 @@
         <activity.name>Activity</activity.name>
 
         <!-- Other UVMS module dependencies -->
-        <uvms.pom.version>3.33</uvms.pom.version>
-        <uvms.commons.version>4.1.15</uvms.commons.version>
-        <usm4uvms.version>4.1.12</usm4uvms.version>
-        <uvms.maven.version>3.33</uvms.maven.version>
+        <uvms.pom.version>3.34</uvms.pom.version>
+        <uvms.commons.version>4.2.0</uvms.commons.version>
+        <usm4uvms.version>4.2.0</usm4uvms.version>
+        <uvms.maven.version>3.34</uvms.maven.version>
 
-        <config.model.version>4.3.12</config.model.version>
-        <exchange.model.version>5.3.32</exchange.model.version>
-        <uvms.config.version>4.1.6</uvms.config.version>
-        <asset.version>6.8.37</asset.version>
+        <config.model.version>4.4.1</config.model.version>
+        <exchange.model.version>5.5.1</exchange.model.version>
+        <uvms.config.version>4.2.0</uvms.config.version>
+        <asset.version>6.10.2</asset.version>
 
         <!-- Third-party dependency versions -->
         <mapstruct.version>1.3.1.Final</mapstruct.version>
-        <xmlunit-core.version>2.10.3</xmlunit-core.version>
-        <apache.commons.lang3.version>3.18.0</apache.commons.lang3.version>
+        <xmlunit-core.version>2.13.0</xmlunit-core.version>
+        <apache.commons.lang3.version>3.20.0</apache.commons.lang3.version>
         <commons.io.version>2.6</commons.io.version>
         <lombok.version>1.18.20</lombok.version>
 
@@ -241,7 +241,7 @@
             <dependency>
                 <groupId>org.eclipse</groupId>
                 <artifactId>yasson</artifactId>
-                <version>1.0.8</version>
+                <version>1.0.11</version>
                 <scope>test</scope>
             </dependency>
 
@@ -284,7 +284,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.13</version>
+                <version>0.8.15</version>
                 <configuration>
                     <destFile>${sonar.jacoco.coverageReportPath}</destFile>
                     <append>true</append>

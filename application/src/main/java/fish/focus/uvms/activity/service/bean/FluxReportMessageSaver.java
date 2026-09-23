@@ -10,8 +10,6 @@ details. You should have received a copy of the GNU General Public License along
 */
 package fish.focus.uvms.activity.service.bean;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import fish.focus.uvms.activity.fa.utils.FaReportSourceEnum;
 import fish.focus.uvms.activity.model.mapper.JAXBMarshaller;
 import fish.focus.uvms.activity.model.schemas.ActivityIDType;
@@ -19,6 +17,8 @@ import fish.focus.uvms.activity.model.schemas.ActivityTableType;
 import fish.focus.uvms.activity.model.schemas.PluginType;
 import fish.focus.uvms.activity.model.schemas.SetFLUXFAReportOrQueryMessageRequest;
 import fish.focus.uvms.activity.service.FluxMessageService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import un.unece.uncefact.data.standard.fluxfareportmessage._3.FLUXFAReportMessage;
 import un.unece.uncefact.data.standard.reusableaggregatebusinessinformationentity._20.FAReportDocument;
 import un.unece.uncefact.data.standard.reusableaggregatebusinessinformationentity._20.FLUXReportDocument;
@@ -51,12 +51,14 @@ public class FluxReportMessageSaver {
     public void saveFluxReportMessage(SetFLUXFAReportOrQueryMessageRequest request) {
         try {
             FLUXFAReportMessage fluxFAReportMessage = JAXBMarshaller.unmarshallTextMessage(request.getRequest(), FLUXFAReportMessage.class);
+
             deleteDuplicatedReportsFromXMLDocument(fluxFAReportMessage);
-            if (CollectionUtils.isNotEmpty(fluxFAReportMessage.getFAReportDocuments())) {
-                fluxMessageService.saveFishingActivityReportDocuments(fluxFAReportMessage, extractPluginType(request.getPluginType()));
-            } else {
-                log.error("After checking faReportDocuments IDs, all of them exist already in Activity DB. So nothing will be saved!!");
+            if (!CollectionUtils.isNotEmpty(fluxFAReportMessage.getFAReportDocuments())) {
+                log.info("After checking faReportDocuments IDs, all of them exist already in Activity DB. So nothing will be saved!!");
+                return;
             }
+
+            fluxMessageService.saveFishingActivityReportDocuments(fluxFAReportMessage, extractPluginType(request.getPluginType()));
         } catch (Exception e) {
             log.error("Failed to save FLUXFAReportMessage", e);
             exchangeServiceBean.updateExchangeMessage(request.getExchangeLogGuid(), e);
